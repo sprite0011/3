@@ -5,6 +5,8 @@ from streamlit_folium import st_folium
 import json
 import os
 import datetime
+# timezoneを使いやすくするため追加
+from datetime import timezone, timedelta
 
 
 # --- 0. 外観のカスタマイズ（クリーン＆モダンUI） ---
@@ -273,7 +275,9 @@ if st.session_state.selected_pin:
         else:
             # まだ誰も占領していない場合のみ、チェックインボタンを表示
            if st.button(f"🚩 チェックイン", use_container_width=True):
-            now_str = datetime.datetime.now().strftime('%m/%d %H:%M:%S')
+            JST = timezone(timedelta(hours=+9), 'JST')
+            now_jst = datetime.datetime.now(JST)
+            now_str = now_jst.strftime('%m/%d %H:%M:%S')
             st.session_state.point_owners[clicked_spot] = {"team": my_team, "time": now_str}
             
             # 【A】現在のピン状況を保存 (save_data.csv)
