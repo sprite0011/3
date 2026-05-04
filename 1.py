@@ -356,7 +356,7 @@ if "log_authenticated" not in st.session_state:
 # まだ認証されていない場合、パスワード入力を求める
 if not st.session_state.log_authenticated:
     log_password = st.sidebar.text_input("ログ閲覧パスワード", type="password", key="log_auth_pw")
-    if log_password == "98765432":
+    if log_password == "123":
         st.session_state.log_authenticated = True
         st.rerun()
     elif log_password != "":
